@@ -5,7 +5,7 @@ version: '3'
 
 # Перечень volume
 volumes:
-  pg_data:
+  pg_data_production:
   static:
 
 # Перечень контейнеров
@@ -19,7 +19,7 @@ services:
     env_file: .env
     # Какой volume подключить для этого контейнера
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - pg_data_production:/var/lib/postgresql/data
   # Имя и описание контейнера с бэкендом
   backend:
     # Из какого Dockerfile собирать образ для этого контейнера:
@@ -42,6 +42,7 @@ services:
     # Сбилдить и запустить образ, 
     # описанный в Dockerfile в папке gateway
     image: sshevyakov/taski_gateway
+    env_file: .env
     volumes:
       - static:/staticfiles/
     # Ключ ports устанавливает
